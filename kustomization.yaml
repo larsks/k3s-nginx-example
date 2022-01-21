@@ -1,0 +1,8 @@
+namespace: nginx-example
+
+resources:
+  - namespace.yaml
+  - base
+  - service1
+  - service2
+  - ingress.yaml

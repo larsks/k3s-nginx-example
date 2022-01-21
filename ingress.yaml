@@ -1,0 +1,40 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myservices
+  annotations:
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-origin: '$http_origin'
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: myserver.com
+    http:
+      paths:
+      - path: /services
+        pathType: Prefix
+        backend:
+          service:
+            name: webservice
+            port:
+              number: 80
+      - path: /services/service_1(/|$)
+        pathType: Prefix
+        backend:
+          service:
+            name: webservice-service1
+            port:
+              number: 80
+      - path: /services/service_2(/|$)
+        pathType: Prefix
+        backend:
+          service:
+            name: webservice-service2
+            port:
+              number: 80

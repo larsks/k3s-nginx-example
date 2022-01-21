@@ -1,0 +1,12 @@
+commonLabels:
+  app: example
+  component: base
+
+resources:
+  - deployment.yaml
+  - service.yaml
+
+configMapGenerator:
+  - name: htdocs
+    files:
+      - index.html

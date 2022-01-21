@@ -1,0 +1,14 @@
+namesuffix: -service2
+
+commonLabels:
+  component: service2
+
+resources:
+  - ../base
+
+
+configMapGenerator:
+  - name: htdocs
+    behavior: replace
+    files:
+      - index.html

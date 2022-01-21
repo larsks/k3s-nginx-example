@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webservice
+spec:
+  template:
+    spec:
+      containers:
+        - name: darkhttpd
+          image: docker.io/alpinelinux/darkhttpd
+          ports:
+            - name: http
+              containerPort: 8080
+          volumeMounts:
+            - name: htdocs
+              mountPath: /var/www/localhost/htdocs
+      volumes:
+        - name: htdocs
+          configMap:
+            name: htdocs
